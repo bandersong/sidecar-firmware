@@ -352,8 +352,9 @@ change to `addon/rp1dsi` but the frame buffer accessors. The blit's real cost is
   `circle-rp1dsi-warmrestart.patch` does what Linux does and what the regulator's own init does too briefly: before the restart
   the panel is shut down (display off, sleep, reset, backlight and the controller's supply off), and at start the controller's
   supply is held off for a real power-on reset (100, then 300, then 1000 ms on each retry), after which 0x5D and then 0x14 are
-  probed (the address a GT911 takes after a reset with INT high). That sequence was measured working on a 5" in bandersong's
-  0.3.1 build; it is **not tested on this build** (nor on the 7"). If the controller is silent after all, the log says
+  probed (the address a GT911 takes after a reset with INT high). This is the same approach as bandersong's 0.3.1 work; **it
+  has not been confirmed on hardware** (not on this build, not on the 7"), so whether touch now returns after a warm restart is
+  still open. If the controller is silent after all, the log says
   `rp1touch2: No touch controller at I2C 0x5D or 0x14, running without touch` and the engine runs on without touch: use the web
   UI, or power cycle. The contact id from the controller is bounded before it indexes anything (from the same PR).
 
